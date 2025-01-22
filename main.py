@@ -5,15 +5,15 @@ import streamlit as st
 def calculate_bmr(weight, height, age, gender):
     """Calculate Basal Metabolic Rate (BMR) based on gender."""
     if gender.lower() == "male":
-        return 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
+        return absolute(88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age))
     else:
-        return 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)
+        return absolute(447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age))
 
 def calculate_daily_calories(bmr, goal, timeframe_days):
     """Calculate daily calorie requirements based on goal."""
     weight_change = abs(goal - bmr)  # Total weight to change in kg
     daily_calorie_deficit = (weight_change * 7700) / timeframe_days  # 1 kg = 7700 kcal
-    return bmr - daily_calorie_deficit if goal < bmr else bmr + daily_calorie_deficit
+    return absolute(bmr - daily_calorie_deficit) if goal < bmr else absolute(bmr + daily_calorie_deficit)
 
 def recommend_workout(intensity, goal):
     """Recommend workouts based on intensity and goal."""
